@@ -143,7 +143,6 @@
     <profile>
       <id>devhost</id>
       <properties>
-        <site.url>http://devhost/</site.url>
       </properties>
     </profile>
     <profile>
@@ -171,7 +170,6 @@
     <profile>
       <id>grid</id>
       <properties>
-        <grid.url>http://localhost:4444/wd/hub/</grid.url>
       </properties>
     </profile>
   </profiles>
