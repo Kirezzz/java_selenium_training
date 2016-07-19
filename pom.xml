@@ -177,7 +177,7 @@
     <profile>
       <id>grid</id>
       <properties>
-        <grid.url>http://10.136.28.114:4444/wd/hub/</grid.url>
+        <grid.url>https://qwerty739:mpqbukWD6tTjCjq78isn@hub-cloud.browserstack.com/wd/hub</grid.url>
       </properties>
     </profile>
   </profiles>
