@@ -1,6 +1,9 @@
 package ru.stqa.selenium;
 
 import org.testng.annotations.*;
+
+import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
+
 import static org.testng.Assert.*;
 import java.util.List;
 import org.openqa.selenium.*;
@@ -17,7 +20,9 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("submit")).click();
     
-    List <WebElement> coversbefore = driver.findElements(By.xpath("//*[starts-with(@id='movie_')]"));
+    //подсчет каверов фильмов до добавления
+    List <WebElement> coversBefore = driver.findElements(By.xpath("//*[starts-with(@id='movie_')]"));
+    int cb = coversBefore.size();
     
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("imdbid")).clear();
@@ -62,11 +67,24 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.name("music")).sendKeys("Music");
     driver.findElement(By.name("cast")).clear();
     driver.findElement(By.name("cast")).sendKeys("Cast");
-    driver.findElement(By.id("submit")).click();
+    driver.findElement(By.id("submit")).click();    
     driver.findElement(By.linkText("Home")).click();
+    
+    //Проверяем, что один кавер добавился на главную страницу
+    testAddFilmSuccessfully = new IsElementPresent(finder);
+    
     driver.findElement(By.linkText("Log out")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
     driver.quit();
+  }
+
+  public boolean isElementPresent(By locator) {
+      try {
+          driver.findElement(locator);
+          return true;
+      } catch (NoSuchElementException e) {
+          return false;
+      }
   }
 
 
