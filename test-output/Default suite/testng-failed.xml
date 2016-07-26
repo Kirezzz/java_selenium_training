@@ -6,16 +6,4 @@
       <class name="ru.stqa.selenium.AddFilmSuccessfully"/>
     </classes>
   </test> <!-- Default test -->
-  <test name="Default test(failed)">
-    <classes>
-      <class name="ru.stqa.selenium.AddFilmSuccessfully">
-        <methods>
-          <include name="testAddFilmSuccessfully"/>
-          <include name="initTestSuite"/>
-          <include name="initWebDriver"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- ru.stqa.selenium.AddFilmSuccessfully -->
-    </classes>
-  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
