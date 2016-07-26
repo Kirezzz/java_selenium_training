@@ -1,25 +1,12 @@
 package ru.stqa.selenium;
 
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
+import java.util.List;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
-public class AddFilmSuccessfully {
-  private WebDriver driver;
-  private String baseUrl;
+public class AddFilmSuccessfully extends TestNgTestBase{
   private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
-
-  @BeforeClass(alwaysRun = true)
-  public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://localhost/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
 
   @Test
   public void testAddFilmSuccessfully() throws Exception {
@@ -29,6 +16,9 @@ public class AddFilmSuccessfully {
     driver.findElement(By.name("password")).clear();
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("submit")).click();
+    
+    List <WebElement> coversbefore = driver.findElements(By.xpath("//*[starts-with(@id='movie_')]"));
+    
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("imdbid")).clear();
     driver.findElement(By.name("imdbid")).sendKeys("100500");
@@ -76,34 +66,9 @@ public class AddFilmSuccessfully {
     driver.findElement(By.linkText("Home")).click();
     driver.findElement(By.linkText("Log out")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
-  }
-
-  @AfterClass(alwaysRun = true)
-  public void tearDown() throws Exception {
     driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
   }
 
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
 
   private String closeAlertAndGetItsText() {
     try {
@@ -119,4 +84,5 @@ public class AddFilmSuccessfully {
       acceptNextAlert = true;
     }
   }
+  
 }
