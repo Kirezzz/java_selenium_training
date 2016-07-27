@@ -8,6 +8,8 @@ import org.openqa.selenium.*;
 
 public class AddFilmSuccessfully extends TestNgTestBase{
   private boolean acceptNextAlert = true;
+  public int cb;
+  public int ca;
 
   @Test
   public void testAddFilmSuccessfully() throws Exception {
@@ -18,7 +20,7 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("submit")).click();
     
-    //подсчет каверов фильмов до добавления. Оставил до лучших времен
+    //подсчет каверов фильмов до добавления.
     List <WebElement> coversBefore = driver.findElements(By.xpath("//*[starts-with(@id='movie_')]"));
     int cb = coversBefore.size();
 
@@ -68,22 +70,25 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.id("submit")).click();    
     driver.findElement(By.linkText("Home")).click();
     
-    //Проверяем, что один кавер добавился на главную страницу
+/*    //Проверяем, что один кавер добавился на главную страницу
     isElementPresent(By.xpath("//*[starts-with(@id='movie_')]"));
-    
+*/    
 	List <WebElement> coversAfter = driver.findElements(By.xpath("//*[starts-with(@id='movie_')]"));
     int ca = coversAfter.size();
+    
+  //подсчет каверов фильмов после добавления.
+    isElementAdded(ca, cb);
     
     driver.findElement(By.linkText("Log out")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
     driver.quit();
   }
 
-  public boolean isElementPresent(By locator) {
-      try {
-    	  driver.findElement(locator);
+  public boolean isElementAdded(int ca, int cb) {
+      if (assertEquals(ca, cb + 1))
+      {
           return true;
-      } catch (NoSuchElementException e) {
+      } else {
           return false;
       }
   }
