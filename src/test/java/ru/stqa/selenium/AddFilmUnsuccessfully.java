@@ -2,7 +2,12 @@ package ru.stqa.selenium;
 
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
+
+import java.util.List;
+
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class AddFilmUnsuccessfully extends TestNgTestBase{
@@ -17,6 +22,12 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
     driver.findElement(By.name("password")).clear();
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("submit")).click();
+    
+    //подсчет каверов фильмов до удалени€.
+    WebDriverWait bwait = new WebDriverWait(driver, 30);
+    List <WebElement> coversBefore = bwait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    int cb = coversBefore.size();
+    
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("aka")).clear();
     driver.findElement(By.name("aka")).sendKeys("Also known as");
@@ -57,7 +68,20 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
     driver.findElement(By.name("cast")).clear();
     driver.findElement(By.name("cast")).sendKeys("Cast");
     driver.findElement(By.id("submit")).click();
+    
+    //ѕровер€ем, что в Title ошибка
+    WebDriverWait twait = new WebDriverWait(driver, 30);
+    WebElement titleError = twait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@class='error' and text()='This field is required']")));
+    
     driver.findElement(By.linkText("Home")).click();
+
+    //ѕровер€ем, что кавер не добавилс€ на главную страницу
+    WebDriverWait await = new WebDriverWait(driver, 30);
+    List <WebElement> coversAfter = await.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    int ca = coversAfter.size();
+    assertEquals(ca, cb);//сравниваем кавер до и после
+    
+    
     driver.findElement(By.linkText("Log out")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
     driver.quit();
