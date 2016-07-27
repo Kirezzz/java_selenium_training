@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Tests" verbose="5">
-  <test name="Test1">
-    <classes>
-      <class name="ru.stqa.selenium.LoginTest"/>
-    </classes>
-  </test>  
+	<test name="AddFilmSuccessfully">
+		<classes>
+		  <class name="ru.stqa.selenium.AddFilmSuccessfully"/>
+		</classes>
+	</test>
+	<test name="RemoveFilm">
+		<classes>
+		  <class name="ru.stqa.selenium.RemoveFilm"/>
+		</classes>
+	</test>
+	<test name="AddFilmUnsuccessfully">
+		<classes>
+		  <class name="ru.stqa.selenium.AddFilmUnsuccessfully"/>
+		</classes>
+	</test>     
 </suite>
