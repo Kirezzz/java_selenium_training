@@ -11,3 +11,9 @@ buildNumber.properties
 .project
 .settings/
 test-output/
+test-output/Default suite/Default test.html
+test-output/Default suite/Default test.html
+test-output/testng-results.xml
+test-output/old/Default suite/methods.html
+test-output/junitreports/TEST-ru.stqa.selenium.LoginTest.xml
+test-output/emailable-report.html
