@@ -12,13 +12,17 @@ public class AddFilmSuccessfully extends TestNgTestBase{
 
   @Test
   public void testAddFilmSuccessfully() throws Exception {
-    driver.get(baseUrl + "/php4dvd/");
+	  
+	  LoginTest login = new LoginTest();
+	  login.testLogin();
+	  
+  /*  driver.get(baseUrl + "/php4dvd/");
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
     driver.findElement(By.name("password")).clear();
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("submit")).click();
-    
+  */  
     //подсчет каверов фильмов до добавления.
     WebDriverWait bwait = new WebDriverWait(driver, 30);
     List <WebElement> coversBefore = bwait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
