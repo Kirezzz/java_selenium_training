@@ -4,28 +4,19 @@ import org.testng.annotations.*;
 import static org.testng.Assert.*;
 import java.util.List;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.server.handler.FindElements;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddFilmSuccessfully extends TestNgTestBase{
-  private boolean acceptNextAlert = true;
-
+  
   @Test
   public void testAddFilmSuccessfully() throws Exception {
 	  
-	  LoginTest login = new LoginTest();
-	  login.testLogin();
+	 login();
 	  
-  /*  driver.get(baseUrl + "/php4dvd/");
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("admin");
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("admin");
-    driver.findElement(By.name("submit")).click();
-  */  
     //подсчет каверов фильмов до добавления.
-    WebDriverWait bwait = new WebDriverWait(driver, 30);
-    List <WebElement> coversBefore = bwait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    List <WebElement> coversBefore = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
     int cb = coversBefore.size();
 
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
@@ -80,27 +71,6 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     int ca = coversAfter.size();
     assertEquals(ca, cb + 1);//сравниваем кавер до и после
     
-    
-    driver.findElement(By.linkText("Log out")).click();
-    assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
-    driver.quit();
+    logOut();
   }
-  
-  
-  
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
-  
 }

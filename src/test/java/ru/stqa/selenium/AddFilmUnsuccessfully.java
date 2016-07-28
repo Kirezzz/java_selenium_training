@@ -11,22 +11,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class AddFilmUnsuccessfully extends TestNgTestBase{
-  private boolean acceptNextAlert = true;
-
 
   @Test
   public void testAddFilmUnsuccessfully() throws Exception {
-    driver.get(baseUrl + "/php4dvd/");
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("admin");
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("admin");
-    driver.findElement(By.name("submit")).click();
+	  
+	  login();
     
     //подсчет каверов фильмов до удаления.
-    WebDriverWait bwait = new WebDriverWait(driver, 30);
-    List <WebElement> coversBefore = bwait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
-    int cb = coversBefore.size();
+	List <WebElement> coversBefore = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
+	int cb = coversBefore.size();
     
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("aka")).clear();
@@ -76,29 +69,10 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
     driver.findElement(By.linkText("Home")).click();
 
     //Проверяем, что кавер не добавился на главную страницу
-    WebDriverWait await = new WebDriverWait(driver, 30);
-    List <WebElement> coversAfter = await.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    List <WebElement> coversAfter = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
     int ca = coversAfter.size();
     assertEquals(ca, cb);//сравниваем кавер до и после
     
-    
-    driver.findElement(By.linkText("Log out")).click();
-    assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));
-    driver.quit();
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
+        logOut();
   }
 }
