@@ -63,8 +63,7 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
     driver.findElement(By.id("submit")).click();
     
     //Проверяем, что в Title ошибка
-    WebDriverWait twait = new WebDriverWait(driver, 30);
-    WebElement titleError = twait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@class='error' and text()='This field is required']")));
+    new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[@class='error' and text()='This field is required']")));
     
     driver.findElement(By.linkText("Home")).click();
 

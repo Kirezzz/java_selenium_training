@@ -4,7 +4,6 @@ import org.testng.annotations.*;
 import static org.testng.Assert.*;
 import java.util.List;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.server.handler.FindElements;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,7 +22,7 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.name("imdbid")).clear();
     driver.findElement(By.name("imdbid")).sendKeys("100500");
     driver.findElement(By.name("name")).clear();
-    driver.findElement(By.name("name")).sendKeys("Title");
+    driver.findElement(By.name("name")).sendKeys("MovieTitle");
     driver.findElement(By.name("aka")).clear();
     driver.findElement(By.name("aka")).sendKeys("Also known as");
     driver.findElement(By.name("year")).clear();
@@ -66,7 +65,7 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.linkText("Home")).click();
     
    //явное ожидание с проверкой, что все элементы подгрузились
-    WebDriverWait await = new WebDriverWait(driver, 30);
+    WebDriverWait await = new WebDriverWait(driver, 10);
     List <WebElement> coversAfter = await.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
     int ca = coversAfter.size();
     assertEquals(ca, cb + 1);//сравниваем кавер до и после
