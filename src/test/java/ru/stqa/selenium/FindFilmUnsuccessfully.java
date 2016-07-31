@@ -13,7 +13,8 @@ public class FindFilmUnsuccessfully extends TestNgTestBase {
   public void testFindFilmUnsuccessfully() throws Exception {
 	  
 	login();
-	  
+	 
+	
     driver.findElement(By.id("q")).clear();
     
     List <WebElement> elements = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));

@@ -16,6 +16,7 @@ public class FindFilmSuccessfully extends TestNgTestBase{
 	login();  
 	  
     //driver.get(baseUrl + "/php4dvd/#!/sort/name asc/");
+	
     driver.findElement(By.id("q")).clear();
     
     List <WebElement> elements = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
