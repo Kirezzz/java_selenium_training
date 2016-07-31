@@ -8,10 +8,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FindFilmSuccessfylly extends TestNgTestBase{
+public class FindFilmSuccessfully extends TestNgTestBase{
 
   @Test
-  public void testFindFilmSuccessfylly() throws Exception {
+  public void testFindFilmSuccessfully() throws Exception {
 	  
 	login();  
 	  
