@@ -16,7 +16,7 @@ public class RemoveFilm extends TestNgTestBase{
 	  @Test
   public void testRemoveFilm() throws Exception {
 
-	login();
+	//login();
     
     //подсчет каверов фильмов до добавления.
     WebDriverWait bwait = new WebDriverWait(driver, 30);
@@ -24,7 +24,7 @@ public class RemoveFilm extends TestNgTestBase{
     int cb = coversBefore.size();
     
    	driver.findElement(By.xpath("//div[@class = 'nocover' and @alt = 'MovieTitle']")).click();
-   	driver.findElement(By.cssSelector("img[alt=\"Remove\"]")).click();
+   	driver.findElement(By.xpath("//img[@title = 'Remove']")).click();
    	assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));
 
     
@@ -35,7 +35,7 @@ public class RemoveFilm extends TestNgTestBase{
    //подсчет каверов фильмов после добавления.
     assertEquals(ca, cb - 1);
     
-    driver.quit();
+    //driver.quit();
  
   }
 
