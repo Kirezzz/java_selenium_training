@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
-
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -26,8 +26,9 @@ public class TestNgTestBase {
   protected static String gridHubUrl;
   protected static String baseUrl;
   protected static Capabilities capabilities;
-  protected WebDriver driver;
+  protected static WebDriver driver;
   private boolean acceptNextAlert = true;
+
 
   @BeforeSuite
   public void initTestSuite() throws IOException {
@@ -67,13 +68,6 @@ public class TestNgTestBase {
     driver.quit();
   }
   
-  public void removeFilm() throws Exception {
-	driver.findElement(By.cssSelector("div.nocover")).click();
-	driver.findElement(By.cssSelector("img[alt=\"Remove\"]")).click();
-	assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to remove this[\\s\\S]$"));
-  }
-  
-  
   public String closeAlertAndGetItsText() {
 	    try {
 	      Alert alert = driver.switchTo().alert();
@@ -87,7 +81,7 @@ public class TestNgTestBase {
 	    } finally {
 	      acceptNextAlert = true;
 	    }
-  
-  	}
+
+	}
   
 }
