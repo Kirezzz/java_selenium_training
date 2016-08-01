@@ -40,7 +40,7 @@ public class TestNgTestBase {
     WebDriverFactory.setMode(WebDriverFactoryMode.THREADLOCAL_SINGLETON);
   }
 
-  @BeforeMethod
+  @BeforeSuite
   public void initWebDriver() {
     driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
   }
@@ -50,7 +50,7 @@ public class TestNgTestBase {
     WebDriverFactory.dismissAll();
   }
   
-
+  @BeforeSuite
   public void login() throws Exception {
 	driver.get(baseUrl + "/php4dvd/");
 	driver.findElement(By.id("username")).clear();
@@ -60,6 +60,7 @@ public class TestNgTestBase {
 	driver.findElement(By.name("submit")).click();
   }
   
+  @AfterSuite
   public void logOut() throws Exception {
 	driver.findElement(By.linkText("Log out")).click();
     assertTrue(closeAlertAndGetItsText().matches("^Are you sure you want to log out[\\s\\S]$"));

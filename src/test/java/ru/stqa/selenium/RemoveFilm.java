@@ -15,7 +15,7 @@ public class RemoveFilm extends TestNgTestBase{
 	@Test
   public void testRemoveFilm() throws Exception {
 
-	login();
+	//login();
     
     //подсчет каверов фильмов до добавления.
     WebDriverWait bwait = new WebDriverWait(driver, 30);
@@ -31,7 +31,7 @@ public class RemoveFilm extends TestNgTestBase{
    //подсчет каверов фильмов после добавления.
     assertEquals(ca, cb - 1);
     
-    driver.quit();
+   // driver.quit();
   }
 
 }

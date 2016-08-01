@@ -12,7 +12,7 @@ public class FindFilmUnsuccessfully extends TestNgTestBase {
   @Test
   public void testFindFilmUnsuccessfully() throws Exception {
 	  
-	login();
+	//login();
 	 
 	
     driver.findElement(By.id("q")).clear();

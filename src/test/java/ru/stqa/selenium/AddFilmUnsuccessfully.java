@@ -15,7 +15,7 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
   @Test
   public void testAddFilmUnsuccessfully() throws Exception {
 	  
-	  login();
+	 // login();
     
     //подсчет каверов фильмов до удаления.
 	List <WebElement> coversBefore = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
@@ -72,6 +72,6 @@ public class AddFilmUnsuccessfully extends TestNgTestBase{
     int ca = coversAfter.size();
     assertEquals(ca, cb);//сравниваем кавер до и после
     
-        logOut();
+   //     logOut();
   }
 }

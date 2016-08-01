@@ -13,7 +13,7 @@ public class FindFilmSuccessfully extends TestNgTestBase{
   @Test
   public void testFindFilmSuccessfully() throws Exception {
 	  
-	login();  
+	//login();  
 	  
     //driver.get(baseUrl + "/php4dvd/#!/sort/name asc/");
 	
@@ -31,7 +31,7 @@ public class FindFilmSuccessfully extends TestNgTestBase{
   //ѕровер€ем, что нашелс€ нужный нам кавер
     new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class ='title' and text() = 'MovieTitle']")));
 
-    logOut();
+    //logOut();
   
   }
 
