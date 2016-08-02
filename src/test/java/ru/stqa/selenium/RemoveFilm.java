@@ -15,13 +15,20 @@ public class RemoveFilm extends TestNgTestBase{
 	  
 	  @Test
   public void testRemoveFilm() throws Exception {
+		  WebDriverWait wait = new WebDriverWait(driver, 10);
+		  int cb = 0;
+		  int ca = 0;
 
 	//login();
     
     //подсчет каверов фильмов до добавления.
-    WebDriverWait bwait = new WebDriverWait(driver, 30);
-    List <WebElement> coversBefore = bwait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
-    int cb = coversBefore.size();
+    try {
+		List <WebElement> coversBefore = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+	    cb = coversBefore.size();
+    	}
+    catch (NoSuchElementException e) {
+    	cb = 0; 
+    };
     
    	driver.findElement(By.xpath("//div[@class = 'nocover' and @alt = 'MovieTitle']")).click();
    	driver.findElement(By.xpath("//img[@title = 'Remove']")).click();
@@ -29,13 +36,13 @@ public class RemoveFilm extends TestNgTestBase{
 
     
     //Явное ожидание с проверкой, что все элементы подгрузились
-    List <WebElement> coversAfter = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
-    int ca = coversAfter.size();
+    List <WebElement> coversAfter = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    ca = coversAfter.size();
         
    //подсчет каверов фильмов после добавления.
     assertEquals(ca, cb - 1);
     
-    //driver.quit();
+   //driver.quit();
  
   }
 

@@ -8,15 +8,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddFilmSuccessfully extends TestNgTestBase{
-  
+
+    
   @Test
   public void testAddFilmSuccessfully() throws Exception {
-	  
-	// login();
-	  
+		int cb;
+		int ca;
+	    WebDriverWait wait = new WebDriverWait(driver, 10);
+ 
     //подсчет каверов фильмов до добавления.
-    List <WebElement> coversBefore = driver.findElements(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]"));
-    int cb = coversBefore.size();
+    try {
+    	List <WebElement> coversBefore = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    	cb = coversBefore.size();
+    }
+    catch (NoSuchElementException e) {
+		cb = 0;
+	}
+    
 
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("imdbid")).clear();
@@ -65,11 +73,10 @@ public class AddFilmSuccessfully extends TestNgTestBase{
     driver.findElement(By.linkText("Home")).click();
     
    //Явное ожидание с проверкой, что все элементы подгрузились
-    WebDriverWait await = new WebDriverWait(driver, 10);
-    List <WebElement> coversAfter = await.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
-    int ca = coversAfter.size();
+    List <WebElement> coversAfter = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='results']/a/div[starts-with(@id,'movie_')]")));
+    ca = coversAfter.size();
     assertEquals(ca, cb + 1);//сравниваем кавер до и после
     
-  //  logOut();
+    //logOut();
   }
 }
